@@ -25,6 +25,7 @@
     self.input   = [[AVCaptureScreenInput alloc] initWithDisplayID:CGMainDisplayID()];
 
     self.input.capturesMouseClicks = YES;
+    self.session.sessionPreset = AVCaptureSessionPreset1280x720;
 
     self.output = [[AVCaptureMovieFileOutput alloc] init];
     self.output.delegate = self;
@@ -167,6 +168,12 @@ didFinishRecordingToOutputFileAtURL:(NSURL*)outputFileURL
       fromConnections:(NSArray*)connections
 		error:(NSError*)error
 {
+  /* we always get -11806 when finish recording even successfully, looks like a false alarm */
+  if (error && [error code] != -11806) 
+  {
+    NSLog(@"Record finished with error: %@", error);
+  }
+
   CFRunLoopStop(CFRunLoopGetCurrent());
   dispatch_semaphore_signal(self.sema);
 }
