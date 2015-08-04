@@ -114,6 +114,10 @@ default_file_name()
 
 - (BOOL) stop
 {
+  if (![self isStarted]) {
+    return YES;
+  }
+
   [self.session stopRunning];
   [self.output stopRecording];
 
