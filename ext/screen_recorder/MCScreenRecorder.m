@@ -98,7 +98,7 @@ default_file_name()
 
 - (BOOL)isStarted
 {
-  return self.output.isRecording;
+  return [self.output isRecording] || [self.session isRunning];
 }
 
 - (double) length
