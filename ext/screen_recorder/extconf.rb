@@ -1,4 +1,4 @@
-require './mkmf_helper'
+require 'mkmf'
 
 $CFLAGS << ' -std=c99 -Wall -Werror -pedantic -ObjC'
 $LIBS   << ' -framework AVFoundation -framework Cocoa'
